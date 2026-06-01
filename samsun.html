@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Hometown – Samsun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<style>
+@page { size: A4 portrait; margin: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #5a5a5a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  background: #f4ead8;
+  font-family: 'Rubik', Georgia, serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.55);
+  position: relative;
+}
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  position: relative;
+  height: 78mm;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(160deg, #182e33 0%, #304848 50%, #203838 100%);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  opacity: 0.88;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,  rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0)    0%, rgba(0,0,0,0.1)  40%, rgba(0,0,0,0.78) 100%);
+}
+
+.hero-badge {
+  position: absolute;
+  top: 6mm;
+  right: 6mm;
+  border: 1.5px solid rgba(212,168,32,0.85);
+  color: #f0c840;
+  font-family: 'Rubik', serif;
+  font-size: 6.8pt;
+  letter-spacing: 0.32em;
+  padding: 2mm 4.5mm;
+  text-transform: uppercase;
+  background: rgba(10,20,10,0.55);
+  backdrop-filter: blur(2px);
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 6mm;
+  left: 8mm;
+  right: 8mm;
+}
+
+.hero-title {
+  font-family: 'Rubik', Georgia, serif;
+  font-size: 46pt;
+  font-weight: 900;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 0 48px rgba(0,0,0,0.5);
+}
+
+.hero-title em {
+  font-style: normal;
+  color: #f5c640;
+}
+
+.hero-sub {
+  margin-top: 2mm;
+  font-family: 'Crimson Pro', serif;
+  font-size: 8.2pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ── GOLD RULE ──────────────────────────── */
+.gold-rule {
+  height: 3px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #7a5800 0%, #d4a820 20%, #f5c840 50%, #d4a820 75%, #7a5800 100%);
+}
+
+/* ── GRID ───────────────────────────────── */
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  min-height: 0;
+}
+
+.cell {
+  padding: 5mm 6mm 4mm;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.cell-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1;
+  margin-bottom: 2mm;
+}
+
+.divider {
+  height: 1px;
+  margin-bottom: 3mm;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+.cell-body {
+  font-size: 7.9pt;
+  line-height: 1.6;
+}
+
+.cell-body em { font-style: italic; }
+
+.cell-body ul { list-style: none; }
+.cell-body li { padding-left: 10px; position: relative; margin-bottom: 1.5mm; }
+.cell-body li::before { content: '–'; position: absolute; left: 0; opacity: 0.6; }
+
+/* ── THEMES ─────────────────────────────── */
+.c-about {
+  background: linear-gradient(150deg, #183333 0%, #245252 100%);
+  color: #ddeeee;
+}
+.c-about .cell-title { color: #f5c840; }
+
+.c-extra {
+  background: linear-gradient(150deg, #0e0e12 0%, #1a1a24 100%);
+  color: #b8bece;
+}
+.c-extra .cell-title { color: #f0b830; }
+
+.c-facts {
+  background: linear-gradient(150deg, #ede4d2 0%, #f5eedd 100%);
+  color: #181410;
+}
+.c-facts .cell-title { color: #1c3c3c; }
+.c-facts .divider    { background: #1c3c3c; }
+
+.c-cuisine {
+  background: linear-gradient(150deg, #4a300c 0%, #725018 100%);
+  color: #f0eee0;
+}
+.c-cuisine .cell-title { color: #f5c840; }
+
+.c-history {
+  background: linear-gradient(150deg, #080e18 0%, #101c2e 100%);
+  color: #a8bece;
+}
+.c-history .cell-title { color: #88b8de; }
+
+/* ── PIDE CELL ───────────────────────── */
+.c-pide {
+  background: linear-gradient(145deg, #8a4008 0%, #c0700a 55%, #a05010 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.8mm;
+  padding: 6mm 4mm;
+}
+
+.lbl-kicker {
+  font-family: 'Crimson Pro', serif;
+  font-size: 6.2pt;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,245,200,0.65);
+}
+
+.lbl-word {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  font-size: 30pt;
+  color: #fff8dc;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.lbl-tr {
+  font-family: 'Crimson Pro', serif;
+  font-size: 7pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,245,180,0.7);
+}
+
+.lbl-line {
+  width: 18mm;
+  height: 1px;
+  background: rgba(255,245,200,0.38);
+  margin: 1mm 0;
+}
+
+.lbl-tag {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 7.8pt;
+  color: rgba(255,245,200,0.88);
+}
+
+/* ── PRINT ──────────────────────────────── */
+@media print {
+  html, body { background: none !important; padding: 0; display: block; }
+  .page { box-shadow: none; }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ────────────────────────────── -->
+  <div class="hero">
+    <img class="hero-img" id="heroImg"
+      src="https://www.kulturportali.gov.tr/repoKulturPortali/large/29012013/c9a7288c-b6b4-47fb-97dd-89027e0798fc.jpg?format=jpg&quality=50"
+      alt="Samsun"
+      referrerpolicy="no-referrer">
+    <div class="hero-gradient"></div>
+    <div class="hero-badge">MY HOMETOWN</div>
+    <div class="hero-content">
+      <div class="hero-title"><em>S</em>amsun</div>
+      <div class="hero-sub">Türkiye &nbsp;·&nbsp; Black Sea &nbsp;·&nbsp; City of Liberation</div>
+    </div>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <!-- ── GRID ────────────────────────────── -->
+  <div class="grid">
+
+    <div class="cell c-about">
+      <div class="cell-title">About Samsun</div>
+      <div class="divider"></div>
+      <div class="cell-body">
+        Samsun is a major city on the Black Sea coast of northern Türkiye. With a population exceeding 1.3 million, it is a vibrant port city and a key economic hub. Samsun holds a special place in Turkish history as the location where the War of Independence began in 1919. It perfectly blends coastal beauty, rich maritime culture, and a dynamic urban lifestyle.
+      </div>
+    </div>
+
+    <div class="cell c-extra">
+      <div class="cell-title">Extra Info</div>
+      <div class="divider"></div>
+      <div class="cell-body">
+        Samsun enjoys a mild, humid Black Sea climate with lush green landscapes and frequent rainfall. It is strategically positioned as a gateway to the Black Sea region. The city features a long, scenic coastline, extensive parks, and modern infrastructure. Its unique geography, situated between mountains and the sea, provides a distinct and refreshing atmosphere compared to Central Anatolia.
+      </div>
+    </div>
+
+    <div class="cell c-facts">
+      <div class="cell-title">Interesting Facts</div>
+      <div class="divider"></div>
+      <ul class="cell-body">
+        <li>Samsun is where Mustafa Kemal Atatürk landed on May 19, 1919, marking the start of the national movement.</li>
+        <li>It is home to the Bandırma Ferry, a symbol of the Turkish War of Independence.</li>
+        <li>The city hosts the largest statue of Atatürk in Türkiye.</li>
+        <li>Samsun is renowned for its fertile agricultural land, particularly for tobacco and hazelnuts.</li>
+        <li>It serves as one of the most important centers for trade and logistics in the Black Sea region.</li>
+      </ul>
+    </div>
+
+    <div class="cell c-cuisine">
+      <div class="cell-title">Cuisine</div>
+      <div class="divider"></div>
+      <div class="cell-body">
+        The most famous local dish is <em>Bafra pidesi</em>, a long, thin, and crispy pita bread filled with minced meat. The region's cuisine is heavily influenced by the Black Sea, featuring fresh fish like <em>hamsi</em> (anchovy). Other local delicacies include <em>tirit</em> (bread-based meat dish), various corn-based breads, and delicious hazelnut-based desserts.
+      </div>
+    </div>
+
+    <div class="cell c-history">
+      <div class="cell-title">History</div>
+      <div class="divider"></div>
+      <div class="cell-body">
+        Known in ancient times as Amisos, the city has a long history as a Greek colony and trade outpost. Throughout the ages, it has been ruled by Pontic, Roman, Byzantine, and Seljuk civilizations. Its modern significance was cemented during the early 20th century, as it became the cradle of the movement that founded the Republic of Türkiye.
+      </div>
+    </div>
+
+    <div class="cell c-pide">
+      <div class="lbl-kicker">The Taste of Samsun</div>
+      <div class="lbl-word">PİDE</div>
+      <div class="lbl-tr">Bafra Style Pita</div>
+      <div class="lbl-line"></div>
+      <div class="lbl-tag">Coastal Culinary Heritage</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
